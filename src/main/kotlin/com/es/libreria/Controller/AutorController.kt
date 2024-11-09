@@ -5,6 +5,8 @@ import com.es.libreria.Service.AutorService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -15,6 +17,24 @@ class AutorController {
     @Autowired // Inyección de dependencias de Spring Framework para que el controlador pueda acceder a los servicios
     private lateinit var autorServices :AutorService
 
+
+    @PostMapping("/")
+    fun insert(
+
+        @RequestBody autornuevo: Autor
+    ): Autor? {
+
+        // Revisar la solicitud HTTP
+        // Comprobar que lo que vieneo no es null
+        // LLamar al Servicer
+
+        if (autornuevo.nombre.isNullOrEmpty() || autornuevo.id != 0L) { // todo comprobar con el de diego
+            return null
+        }
+
+        return autorServices.insert(autornuevo)
+
+    }
 
     /*
     Responsabilidaddes
@@ -36,6 +56,7 @@ class AutorController {
 
         //2do Comunico el co controller con el service
         return  autorServices.getById(id)
+
 
     }
 

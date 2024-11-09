@@ -27,6 +27,6 @@ data class Autor(
     var biografia: String? = null,
 
     @OneToMany(mappedBy = "autor", cascade = [jakarta.persistence.CascadeType.ALL], orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference //para evitar la recursividad , funciona en el lado que tiene la relacion
     val libros: MutableList<Libro> = mutableListOf()
 )

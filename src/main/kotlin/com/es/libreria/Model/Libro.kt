@@ -26,6 +26,6 @@ data class Libro(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id", nullable = false)
-    @JsonBackReference
-    var autor: Autor
+    @JsonBackReference //para evitar la recursividad , funciona en el lado que no tiene la relacion
+    var autor: Autor?
 )
